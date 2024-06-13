@@ -5,8 +5,7 @@ privilege: TrustedInstaller
 actions:
     # Sync time and set to more reliable time servers
   - !service: {name: "w32time", operation: start, ignoreErrors: true}
-  - !run: {exe: 'w32tm', args: '/config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"'}
-  - !run: {exe: 'w32tm', args: '/config /update'}
+  - !run: {exe: 'w32tm', args: '/config /manualpeerlist:pool.ntp.org /syncfromflags:manual /update'}
   - !run: {exe: 'w32tm', args: '/resync'}
 
   - !writeStatus: {status: 'Cleaning user interface'}
@@ -28,7 +27,7 @@ actions:
     
   - !run: {exe: "explorer.exe", wait: false, runas: currentUser}
 
-  - !writeStatus: {status: 'Configuring security permissions', option: "security-enhanced"}
+  - !writeStatus: {status: 'Configuring permissions', option: "security-enhanced"}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorAdmin', type: REG_DWORD, data: '5', option: "security-enhanced"}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorUser', type: REG_DWORD, data: '3', option: "security-enhanced"}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableInstallerDetection', type: REG_DWORD, data: '1', option: "security-enhanced"}
@@ -55,4 +54,3 @@ actions:
   - !run:
     exeDir: true
     exe: "LOGIN.bat"
-    option: "ui"

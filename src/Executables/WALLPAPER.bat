@@ -37,14 +37,17 @@ for /f "usebackq tokens=2 delims=\" %%A in (`reg query "HKEY_USERS" ^| findstr /
 exit /b %RunEC%
 
 :WALLRUN
+reg add "HKEY_USERS\%~1\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableSpotlightCollectionOnDesktop /t REG_DWORD /d 1 /f
 
 if not exist "%WINDIR%\Web\Wallpaper\Windows" echo mkdir "%WINDIR%\Web\Wallpaper\Windows" & mkdir "%WINDIR%\Web\Wallpaper\Windows"
 if exist "%~2\Microsoft\Windows\Themes\Transcoded_000" set "wallChanged=true" & goto lockScreen
 
-echo PowerShell -NoP -C "Add-Type -AssemblyName System.Drawing; $img = New-Object System.Drawing.Bitmap '%~2\Microsoft\Windows\Themes\TranscodedWallpaper'; if ($img.Flags -ne 77840) {exit 1}; if ($img.HorizontalResolution -ne 96) {exit 1}; if ($img.VerticalResolution -ne 96) {exit 1}; if ($img.PropertyIdList -notcontains 40961) {exit 1}; if ($img.PropertyIdList -notcontains 20624) {exit 1}; if ($img.PropertyIdList -notcontains 20625) {exit 1}"
-PowerShell -NoP -C "Add-Type -AssemblyName System.Drawing; $img = New-Object System.Drawing.Bitmap '%~2\Microsoft\Windows\Themes\TranscodedWallpaper'; if ($img.Flags -ne 77840) {exit 1}; if ($img.HorizontalResolution -ne 96) {exit 1}; if ($img.VerticalResolution -ne 96) {exit 1}; if ($img.PropertyIdList -notcontains 40961) {exit 1}; if ($img.PropertyIdList -notcontains 20624) {exit 1}; if ($img.PropertyIdList -notcontains 20625) {exit 1}"
-	if %errorlevel% NEQ 0 set "wallChanged=true" & goto lockScreen
-
+reg query "HKEY_USERS\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\DesktopSpotlight\Settings" /v EnabledState | findstr /c:"0x1" > NUL 2>&1
+if %errorlevel% NEQ 0 (
+	echo PowerShell -NoP -C "Add-Type -AssemblyName System.Drawing; $img = New-Object System.Drawing.Bitmap '%~2\Microsoft\Windows\Themes\TranscodedWallpaper'; if ($img.Flags -ne 77840) {exit 1}; if ($img.HorizontalResolution -ne 96) {exit 1}; if ($img.VerticalResolution -ne 96) {exit 1}; if ($img.PropertyIdList -notcontains 40961) {exit 1}; if ($img.PropertyIdList -notcontains 20624) {exit 1}; if ($img.PropertyIdList -notcontains 20625) {exit 1}"
+	PowerShell -NoP -C "Add-Type -AssemblyName System.Drawing; $img = New-Object System.Drawing.Bitmap '%~2\Microsoft\Windows\Themes\TranscodedWallpaper'; if ($img.Flags -ne 77840) {exit 1}; if ($img.HorizontalResolution -ne 96) {exit 1}; if ($img.VerticalResolution -ne 96) {exit 1}; if ($img.PropertyIdList -notcontains 40961) {exit 1}; if ($img.PropertyIdList -notcontains 20624) {exit 1}; if ($img.PropertyIdList -notcontains 20625) {exit 1}"
+		if errorlevel 1 set "wallChanged=true" & goto lockScreen
+)
 if exist "img0_*" (
 	echo takeown /f "%WINDIR%\Web\4K\Wallpaper\Windows\*.jpg"
 	takeown /f "%WINDIR%\Web\4K\Wallpaper\Windows\*.jpg"
@@ -68,6 +71,9 @@ if not exist "%WINDIR%\Web\Wallpaper\Windows\ame_wallpaper_4K.bmp" set "wallFail
 echo reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v WallPaper /t REG_SZ /d "%WINDIR%\Web\Wallpaper\Windows\ame_wallpaper_4K.bmp" /f
 reg add "HKEY_USERS\%~1\Control Panel\Desktop" /v WallPaper /t REG_SZ /d "%WINDIR%\Web\Wallpaper\Windows\ame_wallpaper_4K.bmp" /f
 	if %errorlevel% NEQ 0 set "wallFail=true" & goto lockScreen
+reg add "HKEY_USERS\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\DesktopSpotlight\Settings" /v EnabledState /t REG_DWORD /d 0 /f
+reg add "HKEY_USERS\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Wallpapers" /v BackgroundType /t REG_DWORD /d 0 /f
+reg add "HKEY_USERS\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Wallpapers" /v CurrentWallpaperPath /t REG_SZ /d "%WINDIR%\Web\Wallpaper\Windows\ame_wallpaper_4K.bmp" /f
 
 del /q /f "%~2\Microsoft\Windows\Themes\TranscodedWallpaper"
 rmdir /q /s "%~2\Microsoft\Windows\Themes\CachedFiles"

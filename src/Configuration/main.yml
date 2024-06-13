@@ -1,0 +1,12 @@
+---
+title: Custom
+description: Custom AME configuration
+privilege: Admin
+actions:
+  - !task {path: 'tasks\regedits.yml'}
+  - !task {path: 'tasks\appx.yml'}
+  - !task {path: 'tasks\services.yml'}
+  - !task {path: 'tasks\components.yml'}
+  - !task {path: 'tasks\files.yml'}
+  - !task {path: 'tasks\config.yml'}
+  - !task {path: 'tasks\software.yml'}
