@@ -1,0 +1,85 @@
+---
+title: APPX
+description: Removal of APPX packages
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: {status: 'Removing APPX packages'}
+  - !appx: {name: '*3DViewer*', type: family}
+  - !appx: {name: '*Apprep.Chx*', type: family}
+  - !appx: {name: '*AssignedAccessLockApp*', type: family}
+  - !appx: {name: '*Bing*', type: family}
+  - !appx: {name: '*CamoStudio*', type: family}
+  - !appx: {name: '*Client.WebExperience*', type: family}
+  - !appx: {name: '*Clipchamp*', type: family}
+  - !appx: {name: '*CloudExperienceHost*', type: family}
+  - !appx: {name: '*CommsPhone*', type: family}
+  - !appx: {name: '*ConnectivityStore*', type: family}
+  - !appx: {name: '*ContentDeliveryManager*', type: family}
+  - !appx: {name: '*Disney*', type: family}
+  - !appx: {name: '*FeedbackHub*', type: family}
+  - !appx: {name: '*GamingApp*', type: family}
+  - !appx: {name: '*Getstarted*', type: family}
+  - !appx: {name: '*Microsoft.549981C3F5F10*', type: family}
+  - !appx: {name: '*Microsoft.Calculator*', type: family}
+  - !appx: {name: '*Microsoft.GetHelp*', type: family}
+  - !appx: {name: '*Microsoft.Messaging*', type: family}
+  - !appx: {name: '*Microsoft.OneConnect*', type: family}
+  - !appx: {name: '*Microsoft.People*', type: family}
+  - !appx: {name: '*Microsoft.Todos*', type: family}
+  - !appx: {name: '*Microsoft.WindowsAlarms*', type: family}
+  - !appx: {name: '*Microsoft.WindowsStore*', type: family}
+  - !appx: {name: '*MicrosoftEdge*', type: family}
+  - !appx: {name: '*MicrosoftOfficeHub*', type: family}
+  - !appx: {name: '*MicrosoftTeams*', type: family}
+  - !appx: {name: '*MixedReality*', type: family}
+  - !appx: {name: '*OneDrive*', type: family}
+  - !appx: {name: '*OneNote*', type: family}
+  - !appx: {name: '*OOBENetwork*', type: family}
+  - !appx: {name: '*OutlookForWindows*', type: family}
+  - !appx: {name: '*Parental*', type: family}
+  - !appx: {name: '*PeopleExperienceHost*', type: family}
+  - !appx: {name: '*Photos*', type: family}
+  - !appx: {name: '*PinningConfirmationDialog*', type: family}
+  - !appx: {name: '*PowerAutomate*', type: family}
+  - !appx: {name: '*QuickAssist*', type: family}
+  - !appx: {name: '*SecHealthUI*', type: family}
+  - !appx: {name: '*SecureAssessmentBrowser*', type: family}
+  - !appx: {name: '*SkypeApp*', type: family}
+  - !appx: {name: '*Solit*', type: family}
+  - !appx: {name: '*Spotify*', type: family}
+  - !appx: {name: '*Sticky*', type: family}
+  - !appx: {name: '*StorePurchaseApp*', type: family}
+  - !appx: {name: '*Sway*', type: family}
+  - !appx: {name: '*Wallet*', type: family}
+  - !appx: {name: '*WebExperienceHost*', type: app}
+  - !appx: {name: '*Windows.DevHome*', type: family}
+  - !appx: {name: '*WindowsCamera*', type: family}
+  - !appx: {name: '*windowscommunicationsapps*', type: family}
+  - !appx: {name: '*WindowsMaps*', type: family}
+  - !appx: {name: '*WindowsPhone*', type: family}
+  - !appx: {name: '*WindowsSoundRecorder*', type: family}
+  - !appx: {name: '*Xbox.TCUI*', type: family}
+  - !appx: {name: '*XboxApp*', type: family}
+  - !appx: {name: '*XboxGameCallableUI*', type: family}
+  - !appx: {name: '*XboxGameOverlay*', type: family}
+  - !appx: {name: '*XboxGamingOverlay*', type: family}
+  - !appx: {name: '*XboxIdenitity*', type: family}
+  - !appx: {name: '*XboxSpeechToTextOverlay*', type: family}
+  - !appx: {name: '*YourPhone*', type: family}
+  - !appx: {name: '*Zune*', type: family}
+
+  - !appx: {name: '*Global.IrisService*', type: app}
+  - !appx: {name: '*Global.Accounts*', type: app}
+  - !appx: {name: '*Global.ValueBanner*', type: app}
+  - !appx: {name: '*Global.DesktopSpotlight*', type: app}
+  - !appx: {name: '*WindowsBackup*', type: app}
+
+  - !appx: {name: '*Client.CBS*', operation: clearCache}
+  - !appx: {name: '*StartMenuExperienceHost*', operation: clearCache}
+  - !appx: {name: '*Windows.Search*', operation: clearCache}
+
+#  - !appx: {name: '*DesktopAppInstaller*', type: family}
+#  - !appx: {name: '*Paint*', type: family}
+#  - !appx: {name: '*WindowsCalculator*', type: family}
+#  - !appx: {name: 'SystemSettingsExtensions.dll', type: Extension *Client.CBS*}
+#  - !appx: {name: 'SearchUx.InternalWebAPi.dll', type: Extension *Client.CBS*}

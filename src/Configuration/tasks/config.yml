@@ -1,0 +1,58 @@
+---
+title: Configuration
+description: Main part of amelioration process
+privilege: TrustedInstaller
+actions:
+    # Sync time and set to more reliable time servers
+  - !service: {name: "w32time", operation: start, ignoreErrors: true}
+  - !run: {exe: 'w32tm', args: '/config /syncfromflags:manual /manualpeerlist:"0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"'}
+  - !run: {exe: 'w32tm', args: '/config /update'}
+  - !run: {exe: 'w32tm', args: '/resync'}
+
+  - !writeStatus: {status: 'Cleaning user interface'}
+  - !service:
+    name: "WpnService"
+    operation: stop
+    ignoreErrors: true
+  - !service:
+    name: "WpnUserService*"
+    operation: stop
+    ignoreErrors: true
+
+  - !taskKill: {name: "explorer"}
+
+  - !run:
+    exeDir: true
+    exe: "CLEANUP.bat"
+    weight: 30
+    
+  - !run: {exe: "explorer.exe", wait: false, runas: currentUser}
+
+  - !writeStatus: {status: 'Configuring security permissions', option: "security-enhanced"}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorAdmin', type: REG_DWORD, data: '5', option: "security-enhanced"}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ConsentPromptBehaviorUser', type: REG_DWORD, data: '3', option: "security-enhanced"}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableInstallerDetection', type: REG_DWORD, data: '1', option: "security-enhanced"}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableLUA', type: REG_DWORD, data: '1', option: "security-enhanced"}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableVirtualization', type: REG_DWORD, data: '1', option: "security-enhanced"}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'PromptOnSecureDesktop', type: REG_DWORD, data: '1', option: "security-enhanced"}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'ValidateAdminCodeSignatures', type: REG_DWORD, data: '0', option: "security-enhanced"}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'FilterAdministratorToken', type: REG_DWORD, data: '0', option: "security-enhanced"}
+
+  - !run:
+    exeDir: true
+    exe: "ADMIN.bat"
+    weight: 10
+    option: "security-enhanced"
+
+  - !writeStatus: {status: 'Implementing SFC mitigation', option: "ame-tools"}
+  - !run:
+    exeDir: true
+    exe: "SFCDEPLOY.bat"
+    weight: 5
+    option: "ame-tools"
+
+  - !writeStatus: {status: 'Modifying login screen', option: "ui"}
+  - !run:
+    exeDir: true
+    exe: "LOGIN.bat"
+    option: "ui"

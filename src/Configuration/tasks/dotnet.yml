@@ -1,0 +1,14 @@
+---
+title: Dotnet
+description: Installs essential prerequsities
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: {status: 'Installing Chocolatey'}
+  - !powerShell:
+    command: 'Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(''https://community.chocolatey.org/install.ps1''))'
+    weight: 30
+
+  - !writeStatus: {status: 'Installing .NET 3.5'}
+  - !cmd:
+    command: '"%ProgramData%\chocolatey\bin\choco.exe" install -y --force --allow-empty-checksums dotnet3.5'
+    weight: 250

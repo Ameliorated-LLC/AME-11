@@ -1,0 +1,182 @@
+{
+    "https_only_mode_enabled": true,
+    "skip_first_run_ui" : true,
+    "show_welcome_page" : false,
+    "extensions": {
+        "settings": {
+            "ocaahdebbfolfmndjeplogmgcagdmblk": {
+                "location": 1,
+                "manifest": {
+                    "content_scripts": [
+                        {
+                            "matches": [
+                                "https://chrome.google.com/webstore*",
+                                "https://addons.opera.com/*extensions/details/*",
+                                "https://microsoftedge.microsoft.com/addons/*"
+                            ],
+                            "js": ["scripts/util.js", "scripts/inject.js"],
+                            "run_at": "document_end"
+                        }
+                    ],
+                    "host_permissions": ["https://clients2.google.com/service/*"],
+                    "optional_host_permissions": ["<all_urls>"],
+                    "background": {
+                        "service_worker": "scripts/background.js"
+                    },
+                    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqF/d41Q7agjkUzYq8ZGbQr8XW8mmEIMXOnR1uCTnYLL+Dm9Z+LO50xZukOISNy6zFxpI8ts/OGLsm+I2x9+UprUU4/EVdmxuwegFE6NBoEhHoRNYY0gbXZkaU8YY/XwzjVY/k18DDhl5NYPEnF6uq4Oyidg+xtd3W4+iGYczuOLER1Tp5y614zOTphcvFYhvUkCijQ6HT1TtRq/34SlFoRQqo4SFiLriK451xWIcfwiMLIekWrdoQa1v8dqIlMA3r6CKc0QykJpSYbiyormWiZ0hl2HLpkZ85mD9V0eDQ5RCtb6vkybK7INcq4yKQV4YkXhr9NpX9U4re4dlFQjEJQIDAQAB",
+                    "name": "Chromium Web Store (Installing...)",
+                    "permissions": [
+                        "management",
+                        "storage",
+                        "alarms",
+                        "contextMenus",
+                        "downloads"
+                    ],
+                    "update_url": "https://raw.githubusercontent.com/NeverDecaf/chromium-web-store/master/updates.xml",
+                    "version": "0.0",
+                    "manifest_version": 3
+                },
+                "path": "ocaahdebbfolfmndjeplogmgcagdmblk\\0.0",
+                "state": 1,
+                "granted_permissions":{
+                    "api": [
+                        "alarms",
+                        "contextMenus",
+                        "downloads",
+                        "management",
+                        "storage"
+                    ],
+                    "explicit_host":["https://clients2.google.com/*"],
+                    "manifest_permissions":[],
+                    "scriptable_host": [
+                        "https://addons.opera.com/*extensions/details/*",
+                        "https://chrome.google.com/webstore*",
+                        "https://microsoftedge.microsoft.com/addons/*"
+                    ]
+                }
+            },
+            "cjpalhdlnbpafiamejdnhcphjbkeiagm": {
+                "location": 1,
+                "manifest": {
+                    "content_scripts": [
+                        {
+                          "all_frames": true,
+                          "js": [
+                            "/js/vapi.js",
+                            "/js/vapi-client.js",
+                            "/js/contentscript.js"
+                          ],
+                          "match_about_blank": true,
+                          "matches": [
+                            "http://*/*",
+                            "https://*/*"
+                          ],
+                          "run_at": "document_start"
+                        },
+                        {
+                          "all_frames": false,
+                          "js": [
+                            "/js/scriptlets/subscriber.js"
+                          ],
+                          "matches": [
+                            "https://easylist.to/*",
+                            "https://*.fanboy.co.nz/*",
+                            "https://filterlists.com/*",
+                            "https://forums.lanik.us/*",
+                            "https://github.com/*",
+                            "https://*.github.io/*",
+                            "https://*.letsblock.it/*"
+                          ],
+                          "run_at": "document_idle"
+                        }
+                    ],
+                    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmJNzUNVjS6Q1qe0NRqpmfX/oSJdgauSZNdfeb5RV1Hji21vX0TivpP5gq0fadwmvmVCtUpOaNUopgejiUFm/iKHPs0o3x7hyKk/eX0t2QT3OZGdXkPiYpTEC0f0p86SQaLoA2eHaOG4uCGi7sxLJmAXc6IsxGKVklh7cCoLUgWEMnj8ZNG2Y8UKG3gBdrpES5hk7QyFDMraO79NmSlWRNgoJHX6XRoY66oYThFQad8KL8q3pf3Oe8uBLKywohU0ZrDPViWHIszXoE9HEvPTFAbHZ1umINni4W/YVs+fhqHtzRJcaKJtsTaYy+cholu5mAYeTZqtHf6bcwJ8t9i2afwIDAQAB",
+                    "name": "uBlock Origin (Installing...)",
+                    "permissions": [
+                        "contextMenus",
+                        "privacy",
+                        "storage",
+                        "tabs",
+                        "unlimitedStorage",
+                        "webNavigation",
+                        "webRequest",
+                        "webRequestBlocking",
+                        "<all_urls>"
+                    ],
+                    "update_url": "https://clients2.google.com/service/update2/crx",
+                    "version": "0.0",
+                    "manifest_version": 2
+                },
+                "path": "cjpalhdlnbpafiamejdnhcphjbkeiagm\\0.0",
+                "state": 1,
+                "granted_permissions": {
+                    "api": [
+                        "contextMenus",
+                        "privacy",
+                        "storage",
+                        "tabs",
+                        "unlimitedStorage",
+                        "webNavigation",
+                        "webRequest",
+                        "webRequestBlocking"
+                    ],
+                    "explicit_host": [
+                        "\u003Call_urls>",
+                        "chrome://favicon/*"
+                    ],
+                    "manifest_permissions":[],
+                    "scriptable_host": [
+                        "http://*/*",
+                        "https://*.fanboy.co.nz/*",
+                        "https://*.github.io/*",
+                        "https://*.letsblock.it/*",
+                        "https://*/*",
+                        "https://easylist.to/*",
+                        "https://filterlists.com/*",
+                        "https://forums.lanik.us/*",
+                        "https://github.com/*"
+                    ]
+                },
+                "incognito": true
+            }
+        }
+    },
+    "default_search_provider_data": {
+        "template_url_data": {
+            "alternate_urls": [],
+            "contextual_search_url": "",
+            "created_by_policy": false,
+            "created_from_play_api": false,
+            "doodle_url": "",
+            "favicon_url": "https://start.duckduckgo.com/favicon.ico",
+            "id": "10",
+            "image_search_branding_label": "",
+            "image_translate_source_language_param_key": "",
+            "image_translate_target_language_param_key": "",
+            "image_translate_url": "",
+            "image_url": "",
+            "image_url_post_params": "",
+            "input_encodings": [],
+            "is_active": 1,
+            "keyword": "start.duckduckgo.com",
+            "logo_url": "",
+            "new_tab_url": "",
+            "originating_url": "",
+            "preconnect_to_search_url": false,
+            "prefetch_likely_navigations": false,
+            "prepopulate_id": 0,
+            "safe_for_autoreplace": false,
+            "search_intent_params": [],
+            "search_url_post_params": "",
+            "short_name": "DuckDuckGo",
+            "side_image_search_param": "",
+            "side_search_param": "",
+            "starter_pack_id": 0,
+            "suggestions_url": "https://start.duckduckgo.com/ac/?q={searchTerms}&type=list",
+            "suggestions_url_post_params": "",
+            "url": "https://start.duckduckgo.com/?q={searchTerms}",
+            "usage_count": 0
+        }
+    }
+}
+

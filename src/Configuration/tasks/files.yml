@@ -1,0 +1,673 @@
+---
+title: Files
+description: Deletes certain Windows files
+privilege: TrustedInstaller
+actions:
+  - !writeStatus: {status: 'Removing files'}
+  - !taskKill:
+    name: "explorer"
+  - !taskKill:
+    name: "msedge"
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Customer Experience Improvement Program\\KernelCeipTask"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Application Experience\\ProgramDataUpdater"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Application Experience\\StartupAppTask"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Clip\\License Validation"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\HelloFace\\FODCleanupTask"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Maps\\MapsToastTask"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\Maps\\MapsUpdateTask"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\UpdateOrchestrator\\UpdateModelTask"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker"
+    operation: delete
+  - !scheduledTask:
+    path: "\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start"
+    operation: delete
+  - !taskKill:
+    name: "SkypeBackgroundHost"
+  - !taskKill:
+    name: "OneDrive"
+  - !taskKill:
+    name: "msiexec"
+#  - !file:
+#    path: "%windir%\\System32\\wlidsvc.dll"
+  - !file:
+    path: "%windir%\\System32\\WpcDesktopMonSvc.dll"
+  - !file:
+    path: "%windir%\\System32\\flightsettings.dll"
+  - !file:
+    path: "%windir%\\System32\\WebThreatDefSvc"
+  - !file:
+    path: "%windir%\\System32\\webthreatdefsvc.dll"
+  - !file:
+    path: "%windir%\\System32\\en-US\\webthreatdefsvc.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\webthreatdefusersvc.dll"
+  - !file:
+    path: "%windir%\\System32\\en-US\\webthreatdefusersvc.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\AgentService.exe"
+  - !file:
+    path: "%windir%\\System32\\InstallService.dll"
+  - !file:
+    path: "%windir%\\System32\\cloudidsvc.dll"
+  - !file:
+    path: "%windir%\\System32\\devicecensus.exe"
+  - !file:
+    path: "%ProgramFiles(x86)%\\Windows Media Player"
+  - !file:
+    path: "%ProgramW6432%\\Windows Media Player"
+  - !file:
+    path: "%ProgramFiles(x86)%\\Windows Mail"
+  - !file:
+    path: "%ProgramW6432%\\Windows Mail"
+  - !file:
+    path: "%windir%\\System32\\wscsvc.dll"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\Apps"
+  - !file:
+    path: "%windir%\\System32\\MoNotificationUx.exe"
+  - !file:
+    path: "%windir%\\System32\\MoNotificationUxStub.exe"
+  - !file:
+    path: "%windir%\\System32\\MusNotifyIcon.exe"
+  - !file:
+    path: "%windir%\\System32\\MusNotificationUx.exe"
+  - !file:
+    path: "%windir%\\System32\\MoNotifyIconHandler.dll"
+  - !file:
+    path: "%windir%\\System32\\MusUpdateHandlers.dll"
+  - !file:
+    path: "%windir%\\System32\\MusDialogHandlers.dll"
+  - !file:
+    path: "%windir%\\System32\\MusUxToastHandler.dll"
+  - !file:
+    path: "%windir%\\UUS"
+  - !service:
+    name: "bits"
+    operation: stop
+  - !service:
+    name: "appidsvc"
+    operation: stop
+  - !service:
+    name: "cryptsvc"
+    operation: stop
+  - !file:
+    path: "%windir%\\SoftwareDistribution"
+    ignoreErrors: true
+  - !file:
+    path: "%windir%\\System32\\OOBE"
+#  - !file:
+#    path: "%windir%\\System32\\SgrmBroker.exe"
+#  - !file:
+#    path: "%windir%\\System32\\SgrmEnclave.dll"
+#  - !file:
+#    path: "%windir%\\System32\\SgrmEnclave_secure.dll"
+#  - !file:
+#    path: "%windir%\\System32\\SgrmLpac.exe"
+  - !file:
+    path: "%ProgramW6432%\\Windows Security"
+  - !file:
+    path: "%windir%\\System32\\wuapi.dll"
+  - !file:
+    path: "%windir%\\System32\\wuapihost.exe"
+  - !file:
+    path: "%windir%\\System32\\wuauclt.exe"
+  - !file:
+    path: "%windir%\\System32\\wuaueng.dll"
+  - !file:
+    path: "%ProgramFiles(x86)%\\Microsoft"
+    weight: 30
+  - !file:
+    path: "%windir%\\System32\\AppLockerCSP.dll"
+  - !file:
+    path: "%windir%\\SysWOW64\\AppLockerCSP.dll"
+  - !file:
+    path: "%windir%\\System32\\drivers\\applockerfltr.sys"
+  - !file:
+    path: "%windir%\\System32\\en-US\\applockercsp.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\AppLocker\\AppLocker.psd1"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\AppLocker\\AppLocker.psd1"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\Microsoft\\Diagnosis\\ETLLogs\\Autologger\\AutoLogger-Diagtrack-Listener.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\Microsoft\\Diagnosis\\ETLLogs\\Autologger\\AutoLogger-Diagtrack-Listener.etl"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\EventTracingManagement\\MSFT_AutologgerConfig_v1.0.cdxml"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\EventTracingManagement\\MSFT_AutologgerConfig_v1.0.cdxml"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\Microsoft\\Diagnosis\\ETLLogs\\Autologger\\AutoLogger-Diagtrack-Listener.etl"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\EventTracingManagement\\MSFT_AutologgerConfig_v1.0.format.ps1xml"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\EventTracingManagement\\MSFT_AutologgerConfig_v1.0.format.ps1xml"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\Provisioning\\provautologger_add.reg"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\Provisioning\\provautologger_del.reg"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\Provisioning\\provautologger_add.reg"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\Provisioning\\provautologger_del.reg"
+  - !file:
+    path: "%windir%\\System32\\IESettingSync.exe"
+  - !file:
+    path: "%windir%\\System32\\gamepanel.exe"    
+  #- !FileAction:
+  #  path: "%windir%\\System32\\ClipSVC.dll"
+  #- !FileAction:
+  #  path: "%windir%\\System32\\en-US\\clipsvc.dll.mui"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\Microsoft\\Windows\\ClipSVC\\tokens.dat"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\Microsoft\\Windows\\ClipSVC\\tokens.dat"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\Microsoft\\Windows\\ClipSVC\\tokens.dat"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\Microsoft\\Windows\\ClipSVC"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\Microsoft\\Windows\\ClipSVC"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\Microsoft\\Windows\\ClipSVC"
+  - !file:
+    path: "%windir%\\System32\\ClipUp.exe"
+  - !file:
+    path: "%windir%\\System32\\DeliveryOptimizationMIProv.mof"
+  - !file:
+    path: "%windir%\\PolicyDefinitions\\DeliveryOptimization.admx"
+  - !file:
+    path: "%windir%\\System32\\DeliveryOptimizationMIProvUninstall.mof"
+  - !file:
+    path: "%windir%\\PolicyDefinitions\\en-US\\DeliveryOptimization.adml"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\DeliveryOptimization\\DeliveryOptimization.psd1"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\DeliveryOptimization\\DeliveryOptimization.psd1"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\DeliveryOptimization\\DeliveryOptimizationStatus.psm1"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\DeliveryOptimization\\DeliveryOptimizationStatus.psm1"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\DeliveryOptimization\\DeliveryOptimizationVerboseLogs.psm1"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\DeliveryOptimization\\DeliveryOptimizationVerboseLogs.psm1"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\State\\migration.dat"
+  - !taskKill:
+    name: "LogonUI"
+    ignoreErrors: true
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\State\\dosvcState.dat"
+    ignoreErrors: true
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\State\\migration.dat.LOG1"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\State\\migration.dat.LOG2"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\State\\dosvcState.dat.LOG1"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\State\\dosvcState.dat.LOG2"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\DeliveryOptimization\\Microsoft.Windows.DeliveryOptimization.AdminCommands.dll"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\DeliveryOptimization\\Microsoft.Windows.DeliveryOptimization.AdminCommands.dll"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20201119_074736_959.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210317_230544_126.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210331_194932_086.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210401_010837_018.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210401_011649_049.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210401_014000_025.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210401_021554_184.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210401_023127_689.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210424_231742_182.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\dosvc.20210424_232559_356.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\domgmt.20210317_230400_085.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\domgmt.20210401_011537_705.etl"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Logs\\domgmt.20210424_232442_384.etl"
+  - !file:
+    path: "%windir%\\System32\\DeviceCensus.exe"
+  - !file:
+    path: "%windir%\\System32\\diagtrack.dll"
+  - !file:
+    path: "%windir%\\DiagTrack\\utc.allow.diffbase"
+  - !file:
+    path: "%windir%\\DiagTrack\\analyticsevents.dat"
+  - !file:
+    path: "%windir%\\DiagTrack\\utc.privacy.diffbase"
+  - !file:
+    path: "%windir%\\DiagTrack\\Settings\\utc.app.json"
+  - !file:
+    path: "%windir%\\System32\\en-US\\diagtrack.dll.mui"
+  - !file:
+    path: "%windir%\\DiagTrack\\Settings\\utc.tracing.json"
+  - !file:
+    path: "%windir%\\DiagTrack\\RunExeActionAllowedList.dat"
+  - !file:
+    path: "%windir%\\DiagTrack\\GetFileActionAllowedList.dat"
+  - !file:
+    path: "%windir%\\DiagTrack\\GetFileInfoActionAllowedList.dat"
+  - !file:
+    path: "%windir%\\DiagTrack\\Scenarios\\windows.uif_ondemand.xml"
+  - !file:
+    path: "%windir%\\DiagTrack\\Settings\\windows.uif_ondemand.json"
+  - !file:
+    path: "%windir%\\DiagTrack\\RemoteAggregatorTriggerCriteria.dat"
+  - !file:
+    path: "%windir%\\DiagTrack\\Scenarios\\windows.diag_ondemand.xml"
+  - !file:
+    path: "%windir%\\System32\\LogFiles\\WMI\\Diagtrack-Listener.etl.004"
+  - !file:
+    path: "%windir%\\DiagTrack\\Settings\\telemetry.ASM-WindowsDefault.json"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\Microsoft\\Diagnosis\\ETLLogs\\ShutdownLogger\\Diagtrack-Listener.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\Microsoft\\Diagnosis\\ETLLogs\\ShutdownLogger\\Diagtrack-Listener.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\Microsoft\\Diagnosis\\ETLLogs\\Autologger\\AutoLogger-Diagtrack-Listener.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\Microsoft\\Diagnosis\\ETLLogs\\Autologger\\AutoLogger-Diagtrack-Listener.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\Microsoft\\Diagnosis\\ETLLogs\\ShutdownLogger\\Diagtrack-Listener.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\Microsoft\\Diagnosis\\ETLLogs\\Autologger\\AutoLogger-Diagtrack-Listener.etl"
+  - !file:
+    path: "%windir%\\System32\\dmclient.exe"
+  - !file:
+    path: "%windir%\\System32\\DDFs\\DMClient_DDF.xml"
+  - !file:
+    path: "%windir%\\System32\\Tasks\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient"
+  - !file:
+    path: "%windir%\\System32\\Tasks\\Microsoft\\Windows\\Feedback\\Siuf\\DmClientOnScenarioDownload"
+  - !file:
+    path: "%windir%\\System32\\omadmclient.exe"
+  - !file:
+    path: "%windir%\\System32\\dosvc.dll"
+  - !file:
+    path: "%windir%\\System32\\en-US\\dosvc.dll.mui"
+  - !file:
+    path: "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization"
+  - !file:
+    path: "%windir%\\PolicyDefinitions\\EnhancedStorage.admx"
+  - !file:
+    path: "%windir%\\PolicyDefinitions\\en-US\\EnhancedStorage.adml"
+  - !file:
+    path: "%windir%\\PolicyDefinitions\\hotspotauth.admx"
+  - !file:
+    path: "%windir%\\PolicyDefinitions\\en-US\\hotspotauth.adml"
+  - !file:
+    path: "%windir%\\schemas\\Provisioning\\hotspotprofile_v1.xsd"
+  - !file:
+    path: "%windir%\\System32\\Windows.Networking.NetworkOperators.HotspotAuthentication.dll"
+  - !file:
+    path: "%windir%\\SysWOW64\\Windows.Networking.NetworkOperators.HotspotAuthentication.dll"
+  - !file:
+    path: "%windir%\\System32\\invagent.dll"
+  - !file:
+    path: "%windir%\\System32\\msra.exe"
+  - !file:
+    path: "%windir%\\SysWOW64\\msra.exe"
+  - !file:
+    path: "%windir%\\System32\\msrahc.dll"
+  - !file:
+    path: "%windir%\\System32\\MsraLegacy.tlb"
+  - !file:
+    path: "%windir%\\SysWOW64\\MsraLegacy.tlb"
+  - !file:
+    path: "%windir%\\System32\\en-US\\msra.exe.mui"
+  - !file:
+    path: "%windir%\\System32\\en-US\\msrahc.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\SIHClient.exe"
+  - !file:
+    path: "%windir%\\System32\\en-US\\sihclient.exe.mui"
+  - !file:
+    path: "%windir%\\Prefetch\\SIHCLIENT.EXE-A872A8BF.pf"
+  - !file:
+    path: "%windir%\\System32\\slui.exe"
+  - !file:
+    path: "%windir%\\System32\\en-US\\slui.exe.mui"
+  - !file:
+    path: "%windir%\\Prefetch\\SLUI.EXE-724E99D9.pf"
+  - !file:
+    path: "%windir%\\System32\\Startupscan.dll"
+  - !file:
+    path: "%windir%\\SysWOW64\\Startupscan.dll"
+  - !file:
+    path: "%windir%\\System32\\en-US\\Startupscan.dll.mui"
+  - !file:
+    path: "%windir%\\SysWOW64\\en-US\\Startupscan.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\StorSvc.dll"
+  - !file:
+    path: "%windir%\\System32\\en-US\\StorSvc.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\usoapi.dll"
+  - !file:
+    path: "%windir%\\SysWOW64\\usoapi.dll"
+  - !file:
+    path: "%windir%\\System32\\UsoClient.exe"
+  - !file:
+    path: "%windir%\\System32\\usocoreps.dll"
+  - !file:
+    path: "%windir%\\System32\\usocoreworker.exe"
+  - !file:
+    path: "%windir%\\System32\\MoUsoCoreWorker.exe"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.2bdb351a-82b4-4f2c-bc55-ec328ca677be.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.4a695923-0852-4c25-9999-60bc09954fbe.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.5e2840a3-5955-481c-83b8-ddd64cdaa7ae.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.761c6d23-f36c-46be-bf3f-26ba35c4dcca.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.80c59111-3f67-46a5-9fd1-379f4b7c2f7d.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.86ba5ad4-3ec9-43cf-997e-568832e6e2b8.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.ab8bb825-292c-450d-ac06-03e39e89d684.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.2bdb351a-82b4-4f2c-bc55-ec328ca677be.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.4a695923-0852-4c25-9999-60bc09954fbe.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.5e2840a3-5955-481c-83b8-ddd64cdaa7ae.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.761c6d23-f36c-46be-bf3f-26ba35c4dcca.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.80c59111-3f67-46a5-9fd1-379f4b7c2f7d.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.86ba5ad4-3ec9-43cf-997e-568832e6e2b8.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.ab8bb825-292c-450d-ac06-03e39e89d684.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.2bdb351a-82b4-4f2c-bc55-ec328ca677be.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.4a695923-0852-4c25-9999-60bc09954fbe.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.5e2840a3-5955-481c-83b8-ddd64cdaa7ae.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.761c6d23-f36c-46be-bf3f-26ba35c4dcca.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.80c59111-3f67-46a5-9fd1-379f4b7c2f7d.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.86ba5ad4-3ec9-43cf-997e-568832e6e2b8.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.ab8bb825-292c-450d-ac06-03e39e89d684.1.etl"
+  - !file:
+    path: "%windir%\\Prefetch\\MOUSOCOREWORKER.EXE-681A8FEE.pf"
+  - !file:
+    path: "%windir%\\System32\\usocoreworker.exe"
+  - !file:
+    path: "%windir%\\System32\\MoUsoCoreWorker.exe"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.2bdb351a-82b4-4f2c-bc55-ec328ca677be.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.4a695923-0852-4c25-9999-60bc09954fbe.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.5e2840a3-5955-481c-83b8-ddd64cdaa7ae.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.761c6d23-f36c-46be-bf3f-26ba35c4dcca.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.80c59111-3f67-46a5-9fd1-379f4b7c2f7d.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.86ba5ad4-3ec9-43cf-997e-568832e6e2b8.1.etl"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\USOShared\\Logs\\System\\MoUsoCoreWorker.ab8bb825-292c-450d-ac06-03e39e89d684.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.2bdb351a-82b4-4f2c-bc55-ec328ca677be.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.4a695923-0852-4c25-9999-60bc09954fbe.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.5e2840a3-5955-481c-83b8-ddd64cdaa7ae.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.761c6d23-f36c-46be-bf3f-26ba35c4dcca.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.80c59111-3f67-46a5-9fd1-379f4b7c2f7d.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.86ba5ad4-3ec9-43cf-997e-568832e6e2b8.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.ab8bb825-292c-450d-ac06-03e39e89d684.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.2bdb351a-82b4-4f2c-bc55-ec328ca677be.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.4a695923-0852-4c25-9999-60bc09954fbe.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.5e2840a3-5955-481c-83b8-ddd64cdaa7ae.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.761c6d23-f36c-46be-bf3f-26ba35c4dcca.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.80c59111-3f67-46a5-9fd1-379f4b7c2f7d.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.86ba5ad4-3ec9-43cf-997e-568832e6e2b8.1.etl"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\USOShared\\Logs\\System\\MoUsoCoreWorker.ab8bb825-292c-450d-ac06-03e39e89d684.1.etl"
+  - !file:
+    path: "%windir%\\Prefetch\\MOUSOCOREWORKER.EXE-681A8FEE.pf"
+  - !file:
+    path: "%windir%\\System32\\usosvc.dll"
+  - !file:
+    path: "%windir%\\System32\\en-US\\usosvc.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\WaaSMedicPS.dll"
+  - !file:
+    path: "%windir%\\System32\\WaaSMedicSvc.dll"
+  - !file:
+    path: "%windir%\\System32\\WaaSAssessment.dll"
+  - !file:
+    path: "%windir%\\System32\\WaaSMedicAgent.exe"
+  - !file:
+    path: "%windir%\\System32\\WaaSMedicCapsule.dll"
+  - !file:
+    path: "%windir%\\System32\\en-US\\WaaSMedicSvc.dll.mui"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RC_WaaSMedic.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RS_WaaSMedic.ps1"
+  - !file:
+    path: "%windir%\\WaaS\\tasks\\17499b8d805e9480903b0df0326a3d231841049e.xml"
+  - !file:
+    path: "%windir%\\WaaS\\tasks\\5ffea6126f02e78b9099eb4614d2d339f03ca5a8.xml"
+  - !file:
+    path: "%windir%\\WaaS\\services\\14a3f9e824793931d34f7f786a538bbc9ef1f0d6.xml"
+  - !file:
+    path: "%windir%\\WaaS\\services\\20bbcadaff3e0543ef358ba4dd8b74bfe8e747c8.xml"
+  - !file:
+    path: "%windir%\\WaaS\\services\\2213703c9c64cc61ba900531652e23c84728d2a2.xml"
+  - !file:
+    path: "%windir%\\WaaS\\services\\315818c03ccc2b10070df2d4ebd09eb6c4c66e58.xml"
+  - !file:
+    path: "%windir%\\WaaS\\services\\43ee7b2a373632f9a701249fd96d0edec2ff1279.xml"
+  - !file:
+    path: "%windir%\\WaaS\\services\\ceb497ee0184aaa4681d2fb2ef242a5b8551eea8.xml"
+  - !file:
+    path: "%windir%\\System32\\Tasks\\Microsoft\\Windows\\WaaSMedic\\PerformRemediation"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\Microsoft\\Windows\\AppRepository\\Microsoft.WindowsMaps_5.1906.1972.0_neutral_split.scale-125_8wekyb3d8bbwe.xml"
+  - !file:
+    path: "%SystemDrive%\\Users\\All Users\\Microsoft\\Windows\\AppRepository\\Microsoft.WindowsMaps_5.1906.1972.0_neutral_split.scale-125_8wekyb3d8bbwe.xml"
+  - !file:
+    path: "%ProgramW6432%\\WindowsApps\\DeletedAllUserPackages\\Microsoft.WindowsMaps_5.1906.1972.0_neutral_split.scale-125_8wekyb3d8bbwe\\resources.pri"
+  - !file:
+    path: "%ProgramW6432%\\WindowsApps\\DeletedAllUserPackages\\Microsoft.WindowsMaps_5.1906.1972.0_neutral_split.scale-125_8wekyb3d8bbwe\\AppxBlockMap.xml"
+  - !file:
+    path: "%ProgramW6432%\\WindowsApps\\DeletedAllUserPackages\\Microsoft.WindowsMaps_5.1906.1972.0_neutral_split.scale-125_8wekyb3d8bbwe\\AppxManifest.xml"
+  - !file:
+    path: "%ProgramW6432%\\WindowsApps\\DeletedAllUserPackages\\Microsoft.WindowsMaps_5.1906.1972.0_neutral_split.scale-125_8wekyb3d8bbwe\\AppxSignature.p7x"
+  - !file:
+    path: "%SystemDrive%\\Documents and Settings\\All Users\\Microsoft\\Windows\\AppRepository\\Microsoft.WindowsMaps_5.1906.1972.0_neutral_split.scale-125_8wekyb3d8bbwe.xml"
+  - !file:
+    path: "%ProgramW6432%\\WindowsApps\\DeletedAllUserPackages\\Microsoft.WindowsMaps*"
+  - !file:
+    path: "%ProgramW6432%\\WindowsApps\\DeletedAllUserPackages\\Microsoft.WindowsMaps_5.1906.1972.0_neutral_split.scale-125_8wekyb3d8bbwe"
+  - !file:
+    path: "%windir%\\WindowsUpdate.log"
+  - !file:
+    path: "%windir%\\PolicyDefinitions\\WindowsUpdate.admx"
+  - !file:
+    path: "%windir%\\System32\\@WindowsUpdateToastIcon.png"
+  - !file:
+    path: "%windir%\\PolicyDefinitions\\en-US\\WindowsUpdate.adml"
+  - !file:
+    path: "%windir%\\System32\\WindowsUpdateElevatedInstaller.exe"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\TS_Main.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\index\\WindowsUpdateDiagnostic.xml"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\cl_Service.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\CL_Utility.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RC_appdata.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RS_AppData.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\CL_SetupEnv.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\DiagPackage.dll"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RC_DateTime.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RS_DateTime.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RC_DataStore.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RC_WaaSMedic.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RS_DataStore.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RS_WaaSMedic.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\VF_DataStore.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\rc_genwuerror.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RS_GENWUError.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\VF_GenWUError.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\DiagPackage.diagpkg"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\cl_windowsupdate.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\cl_windowsversion.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RC_Pendingrestart.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RC_Pendingupdates.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RS_Pendingrestart.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\RS_Pendingupdates.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\VF_Pendingupdates.ps1"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\en-US\\DiagPackage.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\Tasks\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start"
+  - !file:
+    path: "%windir%\\diagnostics\\system\\WindowsUpdate\\en-US\\CL_LocalizationData.psd1"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\WindowsUpdate\\WindowsUpdate.psd1"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\WindowsUpdate\\WindowsUpdate.psd1"
+  - !file:
+    path: "%windir%\\System32\\WindowsPowerShell\\v1.0\\Modules\\WindowsUpdate\\WindowsUpdateLog.psm1"
+  - !file:
+    path: "%windir%\\SysWOW64\\WindowsPowerShell\\v1.0\\Modules\\WindowsUpdate\\WindowsUpdateLog.psm1"
+  - !file:
+    path: "%SystemDrive%\\Users\\Public\\Desktop\\Microsoft Edge.lnk"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Edge.lnk"
+  - !file:
+    path: "%APPDATA%\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Microsoft Edge.lnk"
+  - !file:
+    path: "%SystemDrive%\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PC Health Check.lnk"
+  - !file:
+    path: "%windir%\\System32\\wsqmcons.exe"
+  - !file:
+    path: "%windir%\\System32\\en-US\\wsqmcons.exe.mui"
+  - !file:
+    path: "%windir%\\System32\\wuapi.dll"
+  - !file:
+    path: "%windir%\\SysWOW64\\wuapi.dll"
+  - !file:
+    path: "%windir%\\System32\\wuauclt.exe"
+  - !file:
+    path: "%windir%\\System32\\wuapihost.exe"
+  - !file:
+    path: "%windir%\\System32\\en-US\\wuapi.dll.mui"
+  - !file:
+    path: "%windir%\\SysWOW64\\en-US\\wuapi.dll.mui"
+  - !file:
+    path: "%windir%\\SystemResources\\wuapi.dll.mun"
+  - !file:
+    path: "%windir%\\System32\\en-US\\wuaueng.dll.mui"
+  - !file:
+    path: "%windir%\\System32\\storewuauth.dll"
+  - !file:
+    path: "%windir%\\System32\\wusa.exe"
+  - !file:
+    path: "%windir%\\SysWOW64\\wusa.exe"
+  - !file:
+    path: "%windir%\\System32\\en-US\\wusa.exe.mui"
+  - !file:
+    path: "%windir%\\System32\\wups.dll"
+  - !file:
+    path: "%windir%\\System32\\wups2.dll"
+  - !file:
+    path: "%windir%\\System32\\wuaueng.dll"
+  - !file:
+    path: "%windir%\\System32\\MRT.exe"
