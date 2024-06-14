@@ -4,6 +4,10 @@ description: Base AME registry edits
 privilege: TrustedInstaller
 actions:
   - !writeStatus: {status: 'Modifying registry'}
+  
+  # Re-enable blocklist
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\CI\Config', value: 'VulnerableDriverBlocklistEnable', type: REG_DWORD, data: '1'}
+
   - !run:
     exeDir: true
     exe: "REGI.bat"
@@ -43,7 +47,7 @@ actions:
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata', operation: add}
 
     # New Control Panel cleanup - List of commands: https://winaero.com/ms-settings-commands-in-windows-10/
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'SettingsPageVisibility', type: REG_SZ, data: 'hide:windowsdefender;activation;backup;delivery-optimization;findmydevice;developers;launchsecuritykeyenrollment;recovery;troubleshoot;windowsinsider;windowsinsider-optin;windowsupdate;windowsupdate-activehours;windowsupdate-options;workplace-provisioning;workplace-repairtoken;provisioning;windowsanywhere;regionlanguage-adddisplaylanguage;regionlanguage-languageoptions;regionlanguage-setdisplaylanguage;speech;storagerecommendations;surfacehub-accounts;search;search-moredetails;search-permissions;mobile-devices;personalization-start-places;gaming-gamebar;gaming-gamedvr;gaming-gamemode;family-group;cortana-moredetails;cortana-permissions;cortana-windowssearch;cortana;cortana-language;cortana-talktocortana;controlcenter;maps;maps-downloadmaps;videoplayback;appsforwebsites;optionalfeatures;workplace;emailandaccounts;otherusers;assignedaccess;signinoptions;signinoptions-dynamiclock;sync;backup;signinoptions-launchfaceenrollment;signinoptions-launchfingerprintenrollment;yourinfo;privacy-accessoryapps;privacy-accountinfo;privacy-activityhistory;privacy-advertisingid;privacy-appdiagnostics;privacy-automaticfiledownloads;privacy-backgroundapps;privacy-backgroundspatialperception;privacy-calendar;privacy-callhistory;privacy-webcam;privacy-contacts;privacy-documents;privacy-downloadsfolder;privacy-email;privacy-eyetracker (requires eyetracker hardware);privacy-feedback;privacy-broadfilesystemaccess;privacy-general;privacy-graphicscaptureprogrammatic;privacy-graphicscapturewithoutborder;privacy-speechtyping;privacy-location;privacy-messaging;privacy-microphone;privacy-motion;privacy-musiclibrary;privacy-notifications;privacy-customdevices;privacy-phonecalls;privacy-pictures;privacy-radios;privacy-speech;privacy-tasks;privacy-videos;privacy-voiceactivation;account;crossdevice;project;energyrecommendations;camera;deviceusage;home;quiethours'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'SettingsPageVisibility', type: REG_SZ, data: 'hide:windowsdefender;activation;backup;delivery-optimization;findmydevice;developers;launchsecuritykeyenrollment;recovery;troubleshoot;windowsinsider;windowsinsider-optin;windowsupdate;windowsupdate-activehours;windowsupdate-options;workplace-provisioning;workplace-repairtoken;provisioning;windowsanywhere;regionlanguage-adddisplaylanguage;regionlanguage-languageoptions;regionlanguage-setdisplaylanguage;speech;storagerecommendations;surfacehub-accounts;search;search-moredetails;search-permissions;mobile-devices;personalization-start-places;gaming-gamebar;gaming-gamedvr;gaming-gamemode;family-group;cortana-moredetails;cortana-permissions;cortana-windowssearch;cortana;cortana-language;cortana-talktocortana;controlcenter;maps;maps-downloadmaps;videoplayback;appsforwebsites;optionalfeatures;workplace;emailandaccounts;otherusers;assignedaccess;signinoptions;signinoptions-dynamiclock;sync;backup;signinoptions-launchfaceenrollment;signinoptions-launchfingerprintenrollment;yourinfo;privacy-accessoryapps;privacy-accountinfo;privacy-activityhistory;privacy-advertisingid;privacy-appdiagnostics;privacy-automaticfiledownloads;privacy-backgroundapps;privacy-backgroundspatialperception;privacy-calendar;privacy-callhistory;privacy-webcam;privacy-contacts;privacy-documents;privacy-downloadsfolder;privacy-email;privacy-eyetracker;privacy-feedback;privacy-broadfilesystemaccess;privacy-general;privacy-graphicscaptureprogrammatic;privacy-graphicscapturewithoutborder;privacy-speechtyping;privacy-location;privacy-messaging;privacy-microphone;privacy-motion;privacy-musiclibrary;privacy-notifications;privacy-customdevices;privacy-phonecalls;privacy-pictures;privacy-radios;privacy-speech;privacy-tasks;privacy-videos;privacy-voiceactivation;account;crossdevice;project;camera;deviceusage;home;quiethours'}
 
     # Decrease shutdown time
   - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control', value: 'WaitToKillServiceTimeout', type: REG_SZ, data: '2000'}
@@ -85,9 +89,7 @@ actions:
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences', value: 'ModelDownloadAllowed', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE', value: 'DisableVoice', type: REG_DWORD, data: '1'}
 
-    # Firewall rules to prevent the startmenu from talking
-  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules', value: 'Block Search SearchApp.exe', type: REG_SZ, data: 'v2.30|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|App=C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe|Name=Block Search SearchUI.exe|Desc=Block Cortana Outbound UDP/TCP Traffic|'}
-    #  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules', value: 'Block Search Package', type: REG_SZ, data: 'v2.30|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|Name=Block Search Package|Desc=Block Search Outbound UDP/TCP Traffic|AppPkgId=S-1-15-2-536077884-713174666-1066051701-3219990555-339840825-1966734348-1611281757|Platform=2:6:2|Platform2=GTEQ|'}
+   #  - !registryValue: {path: 'HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules', value: 'Block Search Package', type: REG_SZ, data: 'v2.30|Action=Block|Active=TRUE|Dir=Out|RA42=IntErnet|RA62=IntErnet|Name=Block Search Package|Desc=Block Search Outbound UDP/TCP Traffic|AppPkgId=S-1-15-2-536077884-713174666-1066051701-3219990555-339840825-1966734348-1611281757|Platform=2:6:2|Platform2=GTEQ|'}
 
     # Disable Timeline
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\System', value: 'EnableActivityFeed', type: REG_DWORD, data: '0'}
@@ -128,7 +130,7 @@ actions:
   - !registryValue: {option: "security-enhanced", path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'dontdisplaylastusername', type: REG_DWORD, data: '1'}
 
     # Disable The Lock Screen
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Personalization', value: 'NoLockScreen', type: REG_DWORD, data: '1'}
+#  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\Personalization', value: 'NoLockScreen', type: REG_DWORD, data: '1'}
 
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection', value: 'AllowTelemetry', type: REG_DWORD, data: '0'}
 
@@ -300,6 +302,11 @@ actions:
       
     # Disable opening GameBar when pressing the XBOX button on an XBOX controller
   - !registryValue: {path: 'HKCU\Software\Microsoft\GameBar', value: 'UseNexusForGameBarEnabled', type: REG_DWORD, data: '0'}
+    # Disable opening GameBar when connecting XBOX controller
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: 'URL:ms-gamebar'}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: 'URL Protocol', type: REG_SZ, data: ''}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: 'NoOpenWith', type: REG_SZ, data: ''}
+  - !registryValue: {path: 'HKCR\ms-gamebar\shell\open\command', value: '', type: REG_EXPAND_SZ, data: '%WINDIR%\System32\systray.exe'}
       
     # Disables SmartScreen
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost', value: 'ContentEvaluation', type: REG_DWORD, data: '0'}
@@ -336,7 +343,7 @@ actions:
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_IrisRecommendations', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_AccountNotifications', type: REG_DWORD, data: '0'}
   - !registryValue: {option: "ui", path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarGlomLevel', type: REG_DWORD, data: '2'}
-  - !registryValue: {option: "ui", path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarDa', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarDa', type: REG_DWORD, data: '0'}
   - !registryValue: {option: "ui", path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAl', type: REG_DWORD, data: '0'}
   - !registryValue: {option: "ui", path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'NavPaneShowAllFolders', type: REG_DWORD, data: '0'}
 
@@ -353,6 +360,8 @@ actions:
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance', value: 'Enabled', type: REG_DWORD, data: '0'}
     # Disable configue backup notifications
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.BackupReminder', value: 'Enabled', type: REG_DWORD, data: '0'}
+
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'ContentDeliveryAllowed', type: REG_DWORD, data: '0'}
     # Disable "Let's Finish Setting Up Your Device" OOBE screen
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager', value: 'SubscribedContent-310093Enabled', type: REG_DWORD, data: '0'}
     # Settings suggested content
@@ -438,6 +447,15 @@ actions:
 
     # Remove 'Gallery' in file explorer
   - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_41040327\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}', operation: delete}
+
+    # Prevent DsmSvc from communicating with dspg.akamaiedge.net domains
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata', value: 'PreventDeviceMetadataFromNetwork', type: REG_DWORD, data: '1'}
+
+    # Change time server
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers', value: '', type: REG_SZ, data: '1'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers', value: '1', type: REG_SZ, data: 'pool.ntp.org'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers', value: '2', type: REG_SZ, data: 'time.windows.com'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers', value: '3', type: REG_SZ, data: 'time.nist.gov'}
 
   - !writeStatus: {status: 'Checking users'}
   - !run:

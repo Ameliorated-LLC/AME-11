@@ -2,6 +2,8 @@
 
 echo. & echo Grabbing previous Firefox entries...
 
+setlocal EnableDelayedExpansion
+
 for /f "usebackq tokens=2 delims=-" %%A in (`reg query "HKLM\SOFTWARE\Clients\StartMenuInternet" /k /f "Firefox-" ^| findstr /c:"Firefox-"`) do (
 	set /a "count1=!count1!+1"
 	set "ffBef!count1!=%%A"
@@ -9,11 +11,12 @@ for /f "usebackq tokens=2 delims=-" %%A in (`reg query "HKLM\SOFTWARE\Clients\St
 	set "arg=!arg!if not "%%D"=="%%A" ("
 )
 
+endlocal & set "arg=%arg%" & set "par=%par%"
+
 PowerShell -NoP -C "Start-Process '%ProgramData%\chocolatey\bin\choco.exe' -ArgumentList 'install','-y','--allow-empty-checksums','firefox' -NoNewWindow -Wait"
 PowerShell -NoP -C "Start-Process '%ProgramData%\chocolatey\bin\choco.exe' -ArgumentList 'upgrade','-y','--allow-empty-checksums','firefox' -NoNewWindow -Wait"
 
 call :setAssociations
-
 
 for /f "usebackq delims=" %%A in (`dir /b /a:d "%SYSTEMDRIVE%\Users" ^| findstr /v /i /x /c:"Public" /c:"Default User" /c:"All Users"`) do (
 	echo PowerShell -NoP -C "$ws = New-Object -ComObject WScript.Shell; $s = $ws.CreateShortcut('%SYSTEMDRIVE%\Users\%%A\AppData\Roaming\OpenShell\Pinned\Firefox.lnk'); $S.TargetPath = '%HOMEDRIVE%\Program Files\Mozilla Firefox\firefox.exe'; $S.WorkingDirectory = 'C:\Program Files\Mozilla Firefox'; $S.Save()"
@@ -111,7 +114,7 @@ if not EXIST "%PROGRAMFILES%\Mozilla Firefox\firefox.exe" (
 	exit /b 0
 )
 if exist "%~1\Mozilla\Firefox\profiles.ini" (
-	findstr /c:"%NewCode%" "%~1\Mozilla\Firefox\profiles.ini" > NUL 2>&1
+	findstr /c:"[Install%NewCode%]" "%~1\Mozilla\Firefox\profiles.ini" > NUL 2>&1
 		if not errorlevel 1 (
 			echo. & echo Firefox version already in profiles.ini
 			call :PREFSONLY "%~1"
@@ -174,8 +177,8 @@ for /f "usebackq delims=" %%B in (`dir /B /A:d "%~1\Mozilla\Firefox\Profiles" ^|
 		findstr /V /C:""""app.shield.optoutstudies.enabled"""" /C:""""browser.aboutwelcome.enabled"""" /C:""""browser.disableResetPrompt"""" /C:""""browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons"""" /C:""""browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features"""" /C:""""browser.newtabpage.activity-stream.feeds.section.topstories"""" /C:""""browser.newtabpage.activity-stream.feeds.topsites"""" /C:""""browser.newtabpage.activity-stream.section.highlights.includePocket"""" /C:""""browser.newtabpage.activity-stream.section.highlights.includeVisited"""" /C:""""browser.newtabpage.activity-stream.showSponsored"""" /C:""""browser.newtabpage.activity-stream.showSponsoredTopSites"""" /C:""""browser.urlbar.placeholderNam"""" /C:""""browser.urlbar.suggest.quicksuggest.nonsponsored"""" /C:""""browser.urlbar.suggest.quicksuggest.sponsored"""" /C:""""browser.urlbar.suggest.topsites"""" /C:""""datareporting.healthreport.uploadEnabled"""" /C:""""dom.security.https_only_mode"""" /C:""""dom.security.https_only_mode_ever_enabled"""" "%~1\Mozilla\Firefox\Profiles\%%B\prefs.js ">> "%TEMP%\prefs.js.tmp"
 	)
 	:: Filters out a few prefs from AME-Firefox-Injectiont\prefs.js and adds them to prefs.js.tmp
-	echo findstr /V /C:""""browser.toolbars.bookmarks.visibility"""" /C:""""extensions.webextensions.uuids"""" /C:""""extensions.webextensions.uuids"""" "%~dp0\AME-Firefox-Injection\prefs.js"^>^> "%TEMP%\prefs.js.tmp"
-	findstr /V /C:""""browser.toolbars.bookmarks.visibility"""" /C:""""extensions.webextensions.uuids"""" /C:""""extensions.webextensions.uuids"""" "%~dp0\AME-Firefox-Injection\prefs.js">> "%TEMP%\prefs.js.tmp"
+	echo findstr /V /C:""""browser.toolbars.bookmarks.visibility"""" /C:""""extensions.webextensions.uuids"""" /C:""""extensions.ui.extension.hidden"""" /C:""""extensions.ui.lastCategory"""" "%~dp0\AME-Firefox-Injection\prefs.js"^>^> "%TEMP%\prefs.js.tmp"
+	findstr /V /C:""""browser.toolbars.bookmarks.visibility"""" /C:""""extensions.webextensions.uuids"""" /C:""""extensions.ui.extension.hidden"""" /C:""""extensions.ui.lastCategory"""" "%~dp0\AME-Firefox-Injection\prefs.js">> "%TEMP%\prefs.js.tmp"
 	echo move /y "%TEMP%\prefs.js.tmp" "%~1\Mozilla\Firefox\Profiles\%%B\prefs.js"
 	move /y "%TEMP%\prefs.js.tmp" "%~1\Mozilla\Firefox\Profiles\%%B\prefs.js"
 	if exist "%~1\Mozilla\Firefox\Profiles\%%B\search.json.mozlz4" echo del /Q /F "%~1\Mozilla\Firefox\Profiles\%%B\search.json.mozlz4" & del /Q /F "%~1\Mozilla\Firefox\Profiles\%%B\search.json.mozlz4"
@@ -212,8 +215,8 @@ if exist "%~1\Mozilla\Firefox\Profiles" (
 			findstr /V /C:""""app.shield.optoutstudies.enabled"""" /C:""""browser.aboutwelcome.enabled"""" /C:""""browser.disableResetPrompt"""" /C:""""browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons"""" /C:""""browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features"""" /C:""""browser.newtabpage.activity-stream.feeds.section.topstories"""" /C:""""browser.newtabpage.activity-stream.feeds.topsites"""" /C:""""browser.newtabpage.activity-stream.section.highlights.includePocket"""" /C:""""browser.newtabpage.activity-stream.section.highlights.includeVisited"""" /C:""""browser.newtabpage.activity-stream.showSponsored"""" /C:""""browser.newtabpage.activity-stream.showSponsoredTopSites"""" /C:""""browser.urlbar.placeholderNam"""" /C:""""browser.urlbar.suggest.quicksuggest.nonsponsored"""" /C:""""browser.urlbar.suggest.quicksuggest.sponsored"""" /C:""""browser.urlbar.suggest.topsites"""" /C:""""datareporting.healthreport.uploadEnabled"""" /C:""""dom.security.https_only_mode"""" /C:""""dom.security.https_only_mode_ever_enabled"""" "%~1\Mozilla\Firefox\Profiles\%%A\prefs.js ">> "%TEMP%\prefs.js.tmp"
 		)
 		:: Filters out a few prefs from AME-Firefox-Injectiont\prefs.js and adds them to prefs.js.tmp
-		echo findstr /V /C:""""browser.toolbars.bookmarks.visibility"""" /C:""""extensions.webextensions.uuids"""" /C:""""extensions.webextensions.uuids"""" "%~dp0\AME-Firefox-Injection\prefs.js"^>^> "%TEMP%\prefs.js.tmp"
-		findstr /V /C:""""browser.toolbars.bookmarks.visibility"""" /C:""""extensions.webextensions.uuids"""" /C:""""extensions.webextensions.uuids"""" "%~dp0\AME-Firefox-Injection\prefs.js">> "%TEMP%\prefs.js.tmp"
+		echo findstr /V /C:""""browser.toolbars.bookmarks.visibility"""" /C:""""extensions.webextensions.uuids"""" /C:""""extensions.webextensions.uuids"""" /C:""""browser.uiCustomization.state"""" "%~dp0\AME-Firefox-Injection\prefs.js"^>^> "%TEMP%\prefs.js.tmp"
+		findstr /V /C:""""browser.toolbars.bookmarks.visibility"""" /C:""""extensions.webextensions.uuids"""" /C:""""extensions.webextensions.uuids"""" /C:""""browser.uiCustomization.state"""" "%~dp0\AME-Firefox-Injection\prefs.js">> "%TEMP%\prefs.js.tmp"
 		echo move /y "%TEMP%\prefs.js.tmp" "%~1\Mozilla\Firefox\Profiles\%%A\prefs.js"
 		move /y "%TEMP%\prefs.js.tmp" "%~1\Mozilla\Firefox\Profiles\%%A\prefs.js"
 		if exist "%~1\Mozilla\Firefox\Profiles\%%A\search.json.mozlz4" echo del /Q /F "%~1\Mozilla\Firefox\Profiles\%%A\search.json.mozlz4" & del /Q /F "%~1\Mozilla\Firefox\Profiles\%%A\search.json.mozlz4"
